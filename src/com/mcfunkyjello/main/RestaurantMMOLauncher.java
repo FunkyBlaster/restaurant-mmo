@@ -8,9 +8,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+//FOR SWAPPING TO MAIN GAME JUST MAKE A NEW SCENE AND SWAP TO IT :D
+//
+//TODO:
+//
+//  I put off the settings menu because I wanted to start on the character customization screen functionality first, but
+//  I've laid the initial groundwork for the Settings (Keybindings) menu. Prob gunna have it read from a file, idk yet.
+//
+// BTW MAKE SURE YOU PUT IN A BOOLEAN OR SOMETHING THATLL KEEP MULTIPLE MENUS FROM BEING OPEN (I.E. SETTINGS AND CHAR)
 
 public class RestaurantMMOLauncher extends Application {
 
@@ -30,11 +41,65 @@ public class RestaurantMMOLauncher extends Application {
         charButton.setText("Character");
         settingsButton.setText("Settings");
         quitButton.setText("Quit");
+
         //Define static button interactions here (not reliant on game states).
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("play button fired");
+            }
+        });
+        charButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage charStage = new Stage();
+                GridPane charPanel = new GridPane();
+                charPanel.setAlignment(Pos.CENTER);
+                //init panel components
+                Button skinButtonLeft = new Button("<-");
+                Button skinButtonRight = new Button("->");
+                Button hairButtonLeft = new Button("<-");
+                Button hairButtonRight = new Button("->");
+                Button shirtButtonLeft = new Button("<-");
+                Button shirtButtonRight = new Button("->");
+                Button pantsButtonLeft = new Button("<-");
+                Button pantsButtonRight = new Button("->");
+                //add panel components
+                charPanel.add(skinButtonLeft,1,0);
+                charPanel.add(skinButtonRight,2,0);
+                charPanel.add(hairButtonLeft,1,1);
+                charPanel.add(hairButtonRight,2,1);
+                charPanel.add(shirtButtonLeft,1,2);
+                charPanel.add(shirtButtonRight,2,2);
+                charPanel.add(pantsButtonLeft,1,3);
+                charPanel.add(pantsButtonRight,2,3);
+
+                Scene charScene = new Scene(charPanel);
+                charStage.sizeToScene();
+                charStage.setScene(charScene);
+                charStage.show();
+            }
+        });
+        settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //init components
+                Stage settingsSt = new Stage();
+                GridPane settingP = new GridPane();
+                //set component layout
+                settingP.setAlignment(Pos.CENTER);
+                settingP.setVgap(10);
+                TextArea txt = new TextArea("W");
+                txt.setEditable(false);
+                txt.setFont(new Font("Arial",20.0));
+                Button bindButton1 = new Button("Click to change keybinding.");
+                //add components
+                settingP.add(txt,0,0);
+                settingP.add(bindButton1,1,0);
+                //display stage
+                settingsSt.setScene(new Scene(settingP));
+                settingsSt.sizeToScene();
+                settingsSt.show();
             }
         });
         quitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -43,6 +108,7 @@ public class RestaurantMMOLauncher extends Application {
                 primaryStage.close();
             }
         });
+
         //Initialize window.
         GridPane root = new GridPane();
         root.setAlignment(Pos.CENTER);

@@ -1,0 +1,14 @@
+boss
+
+-health
+-damage
+-phases
+
+
+rarity
+
+-gray
+-green
+-blue 
+-orange
+-red

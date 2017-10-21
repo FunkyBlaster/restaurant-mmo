@@ -1,0 +1,9 @@
+chefs hat
+apron
+weapon
+
+gray    -- common
+green   -- uncommon
+blue    -- rare
+orange  -- epic
+red     -- legendary
